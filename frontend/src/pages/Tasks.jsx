@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function Tasks() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Tasks() {
 
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/tasks", {
+        const response = await fetch(`${API_URL}/api/tasks`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

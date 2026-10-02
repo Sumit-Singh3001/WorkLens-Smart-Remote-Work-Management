@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function ManagerDashboard() {
   const navigate = useNavigate();
@@ -39,12 +40,12 @@ function ManagerDashboard() {
       try {
         const [submissionResponse, employeeResponse] =
           await Promise.all([
-            fetch("http://localhost:5000/api/submissions", {
+            fetch(`${API_URL}/api/submissions`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             }),
-            fetch("http://localhost:5000/api/auth/users", {
+            fetch(`${API_URL}/api/auth/users`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -98,7 +99,7 @@ function ManagerDashboard() {
       setMessage("");
 
       const response = await fetch(
-        "http://localhost:5000/api/tasks",
+        `${API_URL}/api/tasks`,
         {
           method: "POST",
           headers: {
@@ -141,7 +142,7 @@ function ManagerDashboard() {
       setMessage("AI verification in progress...");
 
       const response = await fetch(
-        `http://localhost:5000/api/ai/verify/${submissionId}`,
+        `${API_URL}/api/ai/verify/${submissionId}`,
         {
           method: "POST",
           headers: {
@@ -186,7 +187,7 @@ function ManagerDashboard() {
       setMessage("");
 
       const response = await fetch(
-        `http://localhost:5000/api/reviews/${submissionId}`,
+        `${API_URL}/api/reviews/${submissionId}`,
         {
           method: "PATCH",
           headers: {
@@ -253,7 +254,7 @@ function ManagerDashboard() {
   };
 
   const getFileUrl = (fileUrl) => {
-    return `http://localhost:5000/${fileUrl.replaceAll("\\", "/")}`;
+    return `${API_URL}/${fileUrl.replaceAll("\\", "/")}`;
   };
 
   const getButtonClass = (submissionId, status) => {

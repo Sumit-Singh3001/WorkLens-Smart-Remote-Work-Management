@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import API_URL from "../api";
 
 function TaskDetails() {
   const { id } = useParams();
@@ -21,9 +22,8 @@ function TaskDetails() {
 
     const fetchTaskDetails = async () => {
       try {
-        // Get task
         const taskResponse = await fetch(
-          "http://localhost:5000/api/tasks",
+          `${API_URL}/api/tasks`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -49,9 +49,8 @@ function TaskDetails() {
 
         setTask(selectedTask);
 
-        // Get submissions
         const submissionResponse = await fetch(
-          "http://localhost:5000/api/submissions",
+          `${API_URL}/api/submissions`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -70,9 +69,8 @@ function TaskDetails() {
           setSubmission(selectedSubmission || null);
         }
 
-        // Get timeline
         const timelineResponse = await fetch(
-          `http://localhost:5000/api/timeline/${id}`,
+          `${API_URL}/api/timeline/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -173,7 +171,6 @@ function TaskDetails() {
             </p>
           </div>
 
-          {/* Work Evidence Timeline */}
           <div className="mt-8 rounded-xl border border-slate-800 bg-slate-950 p-6">
             <h3 className="text-xl font-semibold">
               Work Evidence Timeline
@@ -227,7 +224,6 @@ function TaskDetails() {
             </div>
           </div>
 
-          {/* Manager Review */}
           {submission &&
             submission.managerStatus !== "pending" && (
               <div className="mt-8 rounded-xl border border-slate-700 bg-slate-950 p-6">
@@ -258,7 +254,6 @@ function TaskDetails() {
               </div>
             )}
 
-          {/* Submit Work */}
           <div className="mt-8 rounded-xl border border-dashed border-slate-700 p-6">
             <h3 className="text-lg font-semibold">
               Submit Your Work

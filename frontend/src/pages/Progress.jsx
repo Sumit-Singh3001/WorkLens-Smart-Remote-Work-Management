@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function Progress() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Progress() {
     const fetchProgress = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/tasks/progress",
+          `${API_URL}/api/tasks/progress`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
